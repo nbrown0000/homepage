@@ -1,6 +1,7 @@
 const express = require('express')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const MongoClient = require('mongodb').MongoClient
 
 const DAY =  1000 * 60 * 60 * 24
 
@@ -10,7 +11,7 @@ const {
   SESS_NAME = 'sid',
   SESS_SECRET = 'something!that$is%secret&',
   SESS_LIFETIME = DAY,
-  DB_URL = 'mongodb://localhost/test-app',
+  DB_URL = 'mongodb://localhost/',
   DB_PORT = '27017',
   DB_NAME = 'homepage'
 } = process.env
@@ -86,7 +87,24 @@ app.get('/register', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
+  const { email, password } = req.body
+  if (email && password) { // TODO: validation
 
+    MongoClient.connect(DB_URL, (err, client) => {
+      if (err) return console.log(err)
+      db = client.db(DB_NAME)
+      db.collection('users').find().toArray()
+        .then(results => {
+          const user = results[0]
+          if (user.email === email && user.password === password) {
+            req.session.userId = user._id.toHexString()
+            res.redirect('/dashboard')
+          }
+        })
+        .catch(err => console.error(err))
+    })
+
+  }
 })
 
 app.post('/register', (req, res) => {
