@@ -4,7 +4,10 @@
   "description": "A landing page for your browser with weather, news and todo list",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "connect-mongo": "^4.4.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "mongodb": "^4.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
