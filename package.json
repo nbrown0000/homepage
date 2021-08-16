@@ -1,0 +1,26 @@
+{
+  "name": "homepage",
+  "version": "1.0.0",
+  "description": "A landing page for your browser with weather, news and todo list",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nbrown0000/homepage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nbrown0000/homepage/issues"
+  },
+  "homepage": "https://github.com/nbrown0000/homepage#readme"
+}
