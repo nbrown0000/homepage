@@ -47,7 +47,7 @@ app.use(session({
 app.get('/', (req, res) => {
   const { userId } = req.session
   if (userId) {
-    res.redirect('/dashboard')
+    return res.redirect('/dashboard')
   }
   res.redirect('/login')
 })
@@ -98,7 +98,7 @@ app.post('/login', (req, res) => {
           const user = results[0]
           if (user.email === email && user.password === password) {
             req.session.userId = user._id.toHexString()
-            res.redirect('/dashboard')
+            return res.redirect('/dashboard')
           }
         })
         .catch(err => console.error(err))
