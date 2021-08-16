@@ -37,6 +37,22 @@ app.use(session({
   }
 }))
 
+const redirectLogin = (req, res, next) => {
+  if (!req.session.userId) {
+    res.redirect('/login')
+  } else {
+    next()
+  }
+}
+
+const redirectDashboard = (req, res, next) => {
+  if (req.session.userId) {
+    res.redirect('/dashboard')
+  } else {
+    next()
+  }
+}
+
 app.get('/', (req, res) => {
   const { userId } = req.session
   if (userId) {
@@ -45,7 +61,7 @@ app.get('/', (req, res) => {
   res.redirect('/login')
 })
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', redirectLogin, (req, res) => {
   res.send(`
     <h1>Dashboard</h1>
     <p>Weather</p>
@@ -54,7 +70,7 @@ app.get('/dashboard', (req, res) => {
   `)
 })
 
-app.get('/login', (req, res) => {
+app.get('/login', redirectDashboard, (req, res) => {
   res.send(`
     <h1>Login</h1>
     <form method='post' action='/login'>
@@ -66,7 +82,7 @@ app.get('/login', (req, res) => {
   `)
 })
 
-app.get('/register', (req, res) => {
+app.get('/register', redirectDashboard, (req, res) => {
   res.send(`
     <h1>Register</h1>
     <form method='post' action='/register'>
