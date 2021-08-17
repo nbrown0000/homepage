@@ -74,6 +74,8 @@ app.get('/dashboard', redirectLogin, (req, res) => {
 })
 
 app.get('/login', redirectDashboard, (req, res) => {
+  const error = req.session.error || ''
+
   res.send(`
     <h1>Login</h1>
     <form method='post' action='/login'>
@@ -81,6 +83,7 @@ app.get('/login', redirectDashboard, (req, res) => {
       <input type='password' name='password' placeholder='Password' required />
       <input type='submit' />
     </form>
+    <p>${error}</p>
     <a href='/register'>Register</a>
   `)
 })
@@ -112,7 +115,8 @@ app.post('/login', (req, res) => {
             req.session.userId = user._id.toHexString()
             return res.redirect('/dashboard')
           }
-          
+          req.session.error = 'Incorrect username or password'
+          res.redirect('/login')
         })
         .catch(err => console.error(err))
     })
