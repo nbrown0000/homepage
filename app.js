@@ -67,6 +67,9 @@ app.get('/dashboard', redirectLogin, (req, res) => {
     <p>Weather</p>
     <p>News</p>
     <p>Todo List</p>
+    <form method='post' action='/logout'>
+      <button>Logout</button>
+    </form>
   `)
 })
 
@@ -109,6 +112,7 @@ app.post('/login', (req, res) => {
             req.session.userId = user._id.toHexString()
             return res.redirect('/dashboard')
           }
+          
         })
         .catch(err => console.error(err))
     })
@@ -117,6 +121,17 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
+
+})
+
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if(err) {
+      return res.redirect('/dashboard')
+    }
+    res.clearCookie(SESS_NAME)
+    res.redirect('/login')
+  })
 
 })
 
