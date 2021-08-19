@@ -20,6 +20,7 @@ const IN_PROD = NODE_ENV === 'production'
 
 const app = express()
 
+
 app.use(express.urlencoded({
   extended: true
 }))
@@ -45,23 +46,19 @@ const redirectLogin = (req, res, next) => {
   }
 }
 
-const redirectDashboard = (req, res, next) => {
+const redirectHome = (req, res, next) => {
   if (req.session.userId) {
-    res.redirect('/dashboard')
+    res.redirect('/')
   } else {
     next()
   }
 }
 
-app.get('/', (req, res) => {
+app.get('/', redirectLogin, (req, res) => {
   const { userId } = req.session
-  if (userId) {
-    return res.redirect('/dashboard')
+  if (!userId) {
+    return res.redirect('/login')
   }
-  res.redirect('/login')
-})
-
-app.get('/dashboard', redirectLogin, (req, res) => {
   res.send(`
     <h1>Dashboard</h1>
     <p>Weather</p>
@@ -73,7 +70,7 @@ app.get('/dashboard', redirectLogin, (req, res) => {
   `)
 })
 
-app.get('/login', redirectDashboard, (req, res) => {
+app.get('/login', redirectHome, (req, res) => {
   const error = req.session.error || ''
 
   res.send(`
@@ -88,7 +85,7 @@ app.get('/login', redirectDashboard, (req, res) => {
   `)
 })
 
-app.get('/register', redirectDashboard, (req, res) => {
+app.get('/register', redirectHome, (req, res) => {
   res.send(`
     <h1>Register</h1>
     <form method='post' action='/register'>
@@ -113,7 +110,7 @@ app.post('/login', (req, res) => {
           const user = results[0]
           if (user.email === email && user.password === password) {
             req.session.userId = user._id.toHexString()
-            return res.redirect('/dashboard')
+            return res.redirect('/')
           }
           req.session.error = 'Incorrect username or password'
           res.redirect('/login')
@@ -131,7 +128,7 @@ app.post('/register', (req, res) => {
 app.post('/logout', (req, res) => {
   req.session.destroy(err => {
     if(err) {
-      return res.redirect('/dashboard')
+      return res.redirect('/')
     }
     res.clearCookie(SESS_NAME)
     res.redirect('/login')
