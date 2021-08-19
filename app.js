@@ -2,6 +2,7 @@ const express = require('express')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const MongoClient = require('mongodb').MongoClient
+const expressLayouts = require('express-ejs-layouts')
 
 const DAY =  1000 * 60 * 60 * 24
 
@@ -20,6 +21,14 @@ const IN_PROD = NODE_ENV === 'production'
 
 const app = express()
 
+// Static Files
+app.use(express.static('public'))
+app.use('/css', express.static(__dirname + 'public/css'))
+
+// Set Templating Engine
+app.use(expressLayouts)
+app.set('layout', './layouts/full-width')
+app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({
   extended: true
@@ -59,43 +68,18 @@ app.get('/', redirectLogin, (req, res) => {
   if (!userId) {
     return res.redirect('/login')
   }
-  res.send(`
-    <h1>Dashboard</h1>
-    <p>Weather</p>
-    <p>News</p>
-    <p>Todo List</p>
-    <form method='post' action='/logout'>
-      <button>Logout</button>
-    </form>
-  `)
+
+  res.render('index')
 })
 
 app.get('/login', redirectHome, (req, res) => {
   const error = req.session.error || ''
-
-  res.send(`
-    <h1>Login</h1>
-    <form method='post' action='/login'>
-      <input type='email' name='email' placeholder='Email' required />
-      <input type='password' name='password' placeholder='Password' required />
-      <input type='submit' />
-    </form>
-    <p>${error}</p>
-    <a href='/register'>Register</a>
-  `)
+  
+  res.render('login', { error })
 })
 
 app.get('/register', redirectHome, (req, res) => {
-  res.send(`
-    <h1>Register</h1>
-    <form method='post' action='/register'>
-      <input name='name' placeholder='Name' required />
-      <input type='email' name='email' placeholder='Email' required />
-      <input type='password' name='password' placeholder='Password' required />
-      <input type='submit' />
-    </form>
-    <a href='/login'>Login</a>
-  `)
+  res.render('register')
 })
 
 app.post('/login', (req, res) => {

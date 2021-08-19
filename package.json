@@ -5,7 +5,9 @@
   "main": "app.js",
   "dependencies": {
     "connect-mongo": "^4.4.1",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.2",
     "mongodb": "^4.1.0"
   },
@@ -14,7 +16,7 @@
   },
   "scripts": {
     "dev": "nodemon app.js",
-    "start":"node app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
