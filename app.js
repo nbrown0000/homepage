@@ -109,7 +109,27 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
+  const { name, email, password } = req.body
+  if (name && email && password) { // TODO: validation
 
+    MongoClient.connect(DB_URL, (err, client) => {
+      if (err) return console.log(err)
+      db = client.db(DB_NAME)
+      db.collection('users').insertOne({
+        name,
+        email,
+        password // TODO: Hash password
+      })
+        .then(success => {
+          res.redirect('/login')
+        })
+        .catch(err => console.error(err))
+    })
+
+  }
+  else {
+    res.status(401).json({ error: 'Name, username or password not supplied'})
+  }
 })
 
 app.post('/logout', (req, res) => {
