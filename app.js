@@ -89,9 +89,9 @@ app.post('/login', (req, res) => {
     MongoClient.connect(DB_URL, (err, client) => {
       if (err) return console.log(err)
       db = client.db(DB_NAME)
-      db.collection('users').find().toArray()
-        .then(results => {
-          const user = results[0]
+      db.collection('users')
+        .findOne({ "email": email })
+        .then(user => {
           if (user.email === email && user.password === password) {
             req.session.userId = user._id.toHexString()
             return res.redirect('/')
