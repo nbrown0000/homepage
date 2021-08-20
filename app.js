@@ -103,6 +103,9 @@ app.post('/login', (req, res) => {
     })
 
   }
+  else {
+    res.status(401).json({ error: 'Username or password not supplied'})
+  }
 })
 
 app.post('/register', (req, res) => {
