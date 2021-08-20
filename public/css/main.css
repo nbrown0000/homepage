@@ -14,7 +14,7 @@ body {
   align-items: center;
 }
 
-.login {
+.login, .register {
   display: inline-block;
   background-color: #fff;
   display: flex;
@@ -24,19 +24,19 @@ body {
 }
 
 @media screen and (max-width: 767px) {
-  .login {
+  .login, .register {
     width: 100%;
     height: 100%;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .login {
+  .login, .register {
     width: 400px;
     height: 500px;
   }
 }
 @media screen and (min-width: 1024px) {
-  .login {
+  .login, .register {
     width: 400px;
     height: 500px;
   }
@@ -80,14 +80,17 @@ button, form input[type=submit] {
   color: #fff;
 }
 
-.register-message {
+.register-message, .login-message {
   color: #777777;
   font-size: 0.9em;
 }
-.register-message a {
+.register-message a, .login-message a {
   color: #000;
   text-decoration: none;
 }
-.register-message a:hover {
+.register-message a:hover, .login-message a:hover {
   color: #66d3fa;
+}
+.login-message {
+  margin-top: 59px;
 }
