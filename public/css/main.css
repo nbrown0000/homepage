@@ -1,0 +1,93 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login {
+  display: inline-block;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 767px) {
+  .login {
+    width: 100%;
+    height: 100%;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .login {
+    width: 400px;
+    height: 500px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .login {
+    width: 400px;
+    height: 500px;
+  }
+}
+
+.login .error {
+  color: red;
+  padding-top: 10px;
+  /* padding-bottom: 30px; */
+  min-height: 59px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form input {
+  background-color: #eee;
+  border: none;
+}
+
+form input, form button {
+  margin: 10px;
+}
+
+form input {
+  padding: 10px 15px;
+  font-size: 1.1em;
+  font-weight: lighter;
+}
+
+button, form input[type=submit] {
+  border: none;
+  font-size: 1.2em;
+  font-weight: normal;
+  padding: 12px 40px;
+  background-color: #66d3fa;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.register-message {
+  color: #777777;
+  font-size: 0.9em;
+}
+.register-message a {
+  color: #000;
+  text-decoration: none;
+}
+.register-message a:hover {
+  color: #66d3fa;
+}
