@@ -3,6 +3,8 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const MongoClient = require('mongodb').MongoClient
 const expressLayouts = require('express-ejs-layouts')
+const dotenv = require('dotenv')
+dotenv.config()
 
 const DAY =  1000 * 60 * 60 * 24
 
@@ -74,7 +76,7 @@ app.get('/', redirectLogin, (req, res) => {
 
 app.get('/login', redirectHome, (req, res) => {
   const error = req.session.error || ''
-  
+  console.log(process.env.NODE_ENV)
   res.render('login', { error })
 })
 
