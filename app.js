@@ -76,7 +76,7 @@ app.get('/', redirectLogin, (req, res) => {
 
 app.get('/login', redirectHome, (req, res) => {
   const error = req.session.error || ''
-  console.log(process.env.NODE_ENV)
+  
   res.render('login', { error })
 })
 
@@ -111,14 +111,19 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-  const { name, email, password } = req.body
-  if (name && email && password) { // TODO: validation
+  const { name, city, country, email, password } = req.body
+  if (name && city && country && email && password) { // TODO: validation
 
     MongoClient.connect(DB_URL, (err, client) => {
       if (err) return console.log(err)
+      // TODO: convert country to country_code
+      // TODO: call weather_api to get lat and lon
       db = client.db(DB_NAME)
       db.collection('users').insertOne({
         name,
+        city,
+        country,
+        // lat and lon
         email,
         password // TODO: Hash password
       })
@@ -130,7 +135,7 @@ app.post('/register', (req, res) => {
 
   }
   else {
-    res.status(401).json({ error: 'Name, username or password not supplied'})
+    res.status(401).json({ error: 'Name, city, country, email and/or password not supplied'})
   }
 })
 
