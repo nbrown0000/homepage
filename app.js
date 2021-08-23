@@ -3,6 +3,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const MongoClient = require('mongodb').MongoClient
 const expressLayouts = require('express-ejs-layouts')
+const axios = require('axios')
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -16,7 +17,8 @@ const {
   SESS_LIFETIME = DAY,
   DB_URL = 'mongodb://localhost/',
   DB_PORT = '27017',
-  DB_NAME = 'homepage'
+  DB_NAME = 'homepage',
+  WEATHER_API_KEY
 } = process.env
 
 const IN_PROD = NODE_ENV === 'production'
@@ -110,20 +112,31 @@ app.post('/login', (req, res) => {
   }
 })
 
+async function getLatLon(city, country) {
+  const countryData = require('./data/countryData')
+  const data = await countryData.find(c => c.Name.toLowerCase() === country.toLowerCase())
+  const countryCode = data.Code
+  const latlonData = await axios.get(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${WEATHER_API_KEY}`
+  )
+  return latlonData
+}
+
 app.post('/register', (req, res) => {
   const { name, city, country, email, password } = req.body
   if (name && city && country && email && password) { // TODO: validation
 
-    MongoClient.connect(DB_URL, (err, client) => {
+    MongoClient.connect(DB_URL, async (err, client) => {
       if (err) return console.log(err)
-      // TODO: convert country to country_code
+
+      const latlonResponse = await getLatLon(city, country)
+      const { lat, lon } = latlonResponse.data.coord
+
       // TODO: call weather_api to get lat and lon
       db = client.db(DB_NAME)
       db.collection('users').insertOne({
         name,
-        city,
-        country,
-        // lat and lon
+        geoData: { lat, lon },
         email,
         password // TODO: Hash password
       })
