@@ -132,7 +132,6 @@ app.post('/register', (req, res) => {
       const latlonResponse = await getLatLon(city, country)
       const { lat, lon } = latlonResponse.data.coord
 
-      // TODO: call weather_api to get lat and lon
       db = client.db(DB_NAME)
       db.collection('users').insertOne({
         name,
