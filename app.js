@@ -68,11 +68,6 @@ const redirectHome = (req, res, next) => {
 }
 
 app.get('/', redirectLogin, (req, res) => {
-  const { userId } = req.session
-  if (!userId) {
-    return res.redirect('/login')
-  }
-
   res.render('index')
 })
 
