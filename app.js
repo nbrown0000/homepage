@@ -134,7 +134,6 @@ const getWeatherData = async (req, res, next) => {
 
 app.get('/', redirectLogin, getWeatherData, (req, res) => {
   const { weatherData }  = app.locals
-  console.log(weatherData.daily)
   res.render('index', { weatherData })
 })
 
