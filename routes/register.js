@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const MongoClient = require('mongodb').MongoClient
 const axios = require('axios')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const { redirectHome } = require('../middleware/redirects')
 const {
   DB_URL,
@@ -34,18 +36,24 @@ router.post('/', (req, res) => {
 
     const latlonResponse = await getLatLon(city, country)
     const { lat, lon } = latlonResponse.data.coord
-
-    db = client.db(DB_NAME)
-    db.collection('users').insertOne({
-      name,
-      geoData: { lat, lon },
-      email,
-      password // TODO: Hash password
-    })
-      .then(success => {
-        res.redirect('/login')
+    
+    bcrypt.hash(password, saltRounds, function(err, hash) {
+      if (err) { console.error(err) }
+      
+      db = client.db(DB_NAME)
+      db.collection('users').insertOne({
+        name,
+        geoData: { lat, lon },
+        email,
+        password: hash
       })
-      .catch(err => console.error(err))
+        .then(success => {
+          res.redirect('/login')
+        })
+        .catch(err => console.error(err))
+    })
+
+    
   })
 })
 

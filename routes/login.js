@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const MongoClient = require('mongodb').MongoClient
+const bcrypt = require('bcrypt');
 const { redirectHome } = require('../middleware/redirects')
 const {
   DB_URL,
@@ -22,8 +23,10 @@ router.post('/', (req, res) => {
       db = client.db(DB_NAME)
       db.collection('users')
         .findOne({ "email": email })
-        .then(user => {
-          if (user.email === email && user.password === password) {
+        .then(async user => {
+          
+          const match = await bcrypt.compare(password, user.password)
+          if (user.email === email && match) {
             req.session.userId = user._id.toHexString()
             return res.redirect('/')
           }
