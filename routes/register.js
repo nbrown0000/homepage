@@ -25,31 +25,28 @@ router.get('/', redirectHome, (req, res) => {
 
 router.post('/', (req, res) => {
   const { name, city, country, email, password } = req.body
-  if (name && city && country && email && password) { // TODO: validation
-
-    MongoClient.connect(DB_URL, async (err, client) => {
-      if (err) return console.log(err)
-
-      const latlonResponse = await getLatLon(city, country)
-      const { lat, lon } = latlonResponse.data.coord
-
-      db = client.db(DB_NAME)
-      db.collection('users').insertOne({
-        name,
-        geoData: { lat, lon },
-        email,
-        password // TODO: Hash password
-      })
-        .then(success => {
-          res.redirect('/login')
-        })
-        .catch(err => console.error(err))
-    })
-
-  }
-  else {
+  if (!(name && city && country && email && password)) { // TODO: validation
     res.status(401).json({ error: 'Name, city, country, email and/or password not supplied'})
   }
+
+  MongoClient.connect(DB_URL, async (err, client) => {
+    if (err) return console.log(err)
+
+    const latlonResponse = await getLatLon(city, country)
+    const { lat, lon } = latlonResponse.data.coord
+
+    db = client.db(DB_NAME)
+    db.collection('users').insertOne({
+      name,
+      geoData: { lat, lon },
+      email,
+      password // TODO: Hash password
+    })
+      .then(success => {
+        res.redirect('/login')
+      })
+      .catch(err => console.error(err))
+  })
 })
 
 module.exports = router
