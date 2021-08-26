@@ -27,6 +27,7 @@ router.post('/', (req, res) => {
           
           const match = await bcrypt.compare(password, user.password)
           if (user.email === email && match) {
+            req.session.error = ''
             req.session.userId = user._id.toHexString()
             return res.redirect('/')
           }
