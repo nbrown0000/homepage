@@ -55,10 +55,7 @@ router.post('/', registerValidate, (req, res) => {
     return res.redirect('/register')
   }
 
-  // const { name, city, country, email, password } = req.body
-  // if (!(name && city && country && email && password)) { // TODO: validation
-  //   res.status(401).json({ error: 'Name, city, country, email and/or password not supplied'})
-  // }
+  const { name, city, country, email, password } = req.body
 
   MongoClient.connect(DB_URL, async (err, client) => {
     if (err) return console.log(err)
