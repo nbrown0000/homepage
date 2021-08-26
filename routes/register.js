@@ -4,12 +4,24 @@ const MongoClient = require('mongodb').MongoClient
 const axios = require('axios')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const { check, validationResult } = require('express-validator')
 const { redirectHome } = require('../middleware/redirects')
 const {
   DB_URL,
   DB_NAME,
   WEATHER_API_KEY
 } = require('../config')
+
+const registerValidate = [
+  check('email')
+    .isEmail().withMessage('Must be valid email')
+    .trim().escape().normalizeEmail(),
+  check('password')
+    .isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
+    .matches('[0-9]').withMessage('Password must contain a number')
+    .matches('[A-Z]').withMessage('Password must contain an uppercase letter')
+    .trim().escape()
+]
 
 async function getLatLon(city, country) {
   const countryData = require('../data/countryData')
@@ -22,10 +34,21 @@ async function getLatLon(city, country) {
 }
 
 router.get('/', redirectHome, (req, res) => {
-  res.render('register')
+  const error = req.session.error || ''
+
+  res.render('register', { error })
 })
 
-router.post('/', (req, res) => {
+router.post('/', registerValidate, (req, res) => {
+  const validationErrors = validationResult(req)
+  if (!validationErrors.isEmpty()) {
+    const errorMessage = validationErrors.array().reduce((acc, cur) => {
+      return acc + cur.msg + '. '
+    }, '')
+    req.session.error = `${errorMessage}`
+    return res.redirect('/register')
+  }
+
   const { name, city, country, email, password } = req.body
   if (!(name && city && country && email && password)) { // TODO: validation
     res.status(401).json({ error: 'Name, city, country, email and/or password not supplied'})
@@ -48,6 +71,7 @@ router.post('/', (req, res) => {
         password: hash
       })
         .then(success => {
+          req.session.error = ''
           res.redirect('/login')
         })
         .catch(err => console.error(err))
