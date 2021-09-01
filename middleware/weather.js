@@ -35,7 +35,7 @@ const getWeatherData = async (req, res, next) => {
       // If within the same day pass stored weather data to app.locals
       if (today_date <= dateLastFetched_date && today_month == dateLastFetched_month) {
         res.locals.weatherData = response.weatherData
-        next()
+        return next()
       }
     }
 
