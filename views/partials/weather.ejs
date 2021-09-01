@@ -1,0 +1,21 @@
+<section>
+  <% if (weatherData) { %>
+
+    <ul>
+      <% weatherData.daily.map(function(elem) { %>
+        <% const date = new Date(elem.dt * 1000).getDate() %>
+        <% const month = new Date(elem.dt * 1000).getMonth() + 1 %>
+        <li>
+          <p><%= date + ' / ' + month %></p>
+          <p>Max: <%= elem.temp.max %></p>
+          <p>Min: <%= elem.temp.min %></p>
+        </li>
+      <% }) %>
+    </ul>
+
+  <% } else { %>
+
+    <p>No weather data!!!</p>
+
+  <% } %>
+</section>
