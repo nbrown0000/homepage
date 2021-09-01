@@ -53,8 +53,8 @@ const registerRoute = require('./routes/register')
 // const { redirectHome, redirectLogin } = require('./middleware/redirects')
 
 app.get('/', redirectLogin, getWeatherData, getNewsData, (req, res) => {
-  const { weatherData }  = res.locals
-  res.render('index', { weatherData })
+  const { weatherData, newsData }  = res.locals
+  res.render('index', { weatherData, newsData })
 })
 
 app.use('/login', loginRoute)

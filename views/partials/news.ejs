@@ -1,3 +1,17 @@
 <setion>
-  News
+  <% if (newsData) { %>
+
+    <ul>
+      <% newsData.articles.map(function(elem) { %>
+        <li>
+          <p><%= elem.title %></p>
+        </li>
+      <% }) %>
+    </ul>
+
+  <% } else { %>
+
+    <p>No news data!!!</p>
+
+  <% } %>
 </setion>
