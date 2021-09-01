@@ -46,12 +46,13 @@ app.use(session({
 
 const { redirectLogin } = require('./middleware/redirects')
 const { getWeatherData } = require('./middleware/weather')
+const { getNewsData } = require('./middleware/news')
 
 const loginRoute = require('./routes/login')
 const registerRoute = require('./routes/register')
 // const { redirectHome, redirectLogin } = require('./middleware/redirects')
 
-app.get('/', redirectLogin, getWeatherData, (req, res) => {
+app.get('/', redirectLogin, getWeatherData, getNewsData, (req, res) => {
   const { weatherData }  = res.locals
   res.render('index', { weatherData })
 })
