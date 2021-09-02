@@ -97,3 +97,21 @@ button, form input[type=submit] {
 
 .grow { transition: all .2s ease-in-out; }
 .grow:hover { transform: scale(1.1); }
+
+.weather-section {
+  /* background: green; */
+  padding: 10px;
+}
+
+.weather-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.weather-day {
+  border: 1px solid darkgrey;
+  list-style: none;
+  padding: 5px 10px;
+  background-color: #FFF;
+}
