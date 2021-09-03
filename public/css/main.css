@@ -116,3 +116,23 @@ button, form input[type=submit] {
   padding: 10px;
   background-color: #FFF;
 }
+
+.news-section {
+  padding: 10px;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.news-article {
+  border: 1px solid darkgrey;
+  list-style: none;
+  padding: 10px;
+  background-color: #FFF;
+  width: 200px;
+  margin-bottom: 10px;
+}
