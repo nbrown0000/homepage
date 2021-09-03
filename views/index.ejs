@@ -1,11 +1,8 @@
 <main class="main-dashboard">
-  <h1>Dashboard</h1>
 
+  <%- include('partials/nav.ejs') %>
   <%- include('partials/weather.ejs') %>
   <%- include('partials/news.ejs') %>
   <%- include('partials/todos.ejs') %>
 
-  <form method='post' action='/logout'>
-    <button>Logout</button>
-  </form>
 </main>
