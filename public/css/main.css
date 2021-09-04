@@ -43,6 +43,10 @@ body {
 
 /* LAYOUT FOR SMARTPHONES */
 @media screen and (max-width: 767px) {
+  .hidden-mobile {
+    display: none;
+  }
+
   .nav-list img {
     width: 40px;
   }

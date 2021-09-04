@@ -1,11 +1,27 @@
 <section class="nav-section">
   <nav>
     <ul class="nav-list">
-      <li class="nav-profile"><img src="img/user.png" /></li>
-      <li class="nav-weather"><img src="img/rainy-day.png" /></li>
-      <li class="nav-news"><img src="img/news.png" /></li>
-      <li class="nav-todos"><img src="img/to-do-list.png" /></li>
-      <li class="nav-settings"><img src="img/settings.png" /></li>
+
+      <li class="nav-profile">
+        <a><img src="img/user.png" /></a>
+      </li>
+
+      <li class="nav-weather">
+        <a onclick="showWeather()"><img src="img/rainy-day.png" /></a>
+      </li>
+
+      <li class="nav-news">
+        <a onclick="showNews()"><img src="img/news.png" /></a>
+      </li>
+
+      <li class="nav-todos">
+        <a onclick="showTodos()"><img src="img/to-do-list.png" /></a>
+      </li>
+
+      <li class="nav-settings">
+        <a><img src="img/settings.png" /></a>
+      </li>
+
       <li>
         <form method='post' action='/logout'>
           <button>
@@ -13,6 +29,9 @@
           </button>
         </form>
       </li>
+
     </ul>
   </nav>
 </section>
+
+<script type="text/javascript" src="js/nav.js"></script>
