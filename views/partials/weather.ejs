@@ -22,14 +22,27 @@
         <% const date = new Date(elem.dt * 1000).getDate() %>
         <% const month = new Date(elem.dt * 1000).getMonth() + 1 %>
         <li class="weather-day">
+
           <h1>
             <%= day %>
             <% if (index!==0) { %>
               <span><%= date %>/<%= month %></span>
             <% } %>
           </h1>
-          <p>Min: <span class="weather-day-temp-min"><%= elem.temp.min %></span></p>
-          <p>Max: <span class="weather-day-temp-max"><%= elem.temp.max %></span></p>
+
+          <p>
+            Min: 
+            <span class="weather-day-temp-min">
+              <%= elem.temp.min.toFixed(0) %><% if (index===0) { %>&#8451;<% } %>
+            </span>
+          </p>
+
+          <p>
+            Max: 
+            <span class="weather-day-temp-max">
+              <%= elem.temp.max.toFixed(0) %><% if (index===0) { %>&#8451;<% } %>
+            </span>
+          </p>
         </li>
       <% }) %>
     </ul>
