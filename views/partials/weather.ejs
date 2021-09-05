@@ -1,14 +1,35 @@
 <section class="weather-section">
+  <%
+  function dayOfWeek(dayNumber) {
+    switch (dayNumber) {
+      case 0: return "Sunday";
+      case 1: return "Monday";
+      case 2: return "Tuesday";
+      case 3: return "Wednesday";
+      case 4: return "Thursday";
+      case 5: return "Friday";
+      case 6: return "Saturday";
+      default: return "";
+    }
+  }
+  %>
+
   <% if (weatherData) { %>
 
     <ul class="weather-list">
-      <% weatherData.daily.map(function(elem) { %>
+      <% weatherData.daily.map(function(elem,index) { %>
+        <% const day = dayOfWeek(new Date(elem.dt * 1000).getDay()) %>
         <% const date = new Date(elem.dt * 1000).getDate() %>
         <% const month = new Date(elem.dt * 1000).getMonth() + 1 %>
         <li class="weather-day">
-          <p><%= date + ' / ' + month %></p>
-          <p>Max: <%= elem.temp.max %></p>
-          <p>Min: <%= elem.temp.min %></p>
+          <h1>
+            <%= day %>
+            <% if (index!==0) { %>
+              <span><%= date %>/<%= month %></span>
+            <% } %>
+          </h1>
+          <p>Min: <span class="weather-day-temp-min"><%= elem.temp.min %></span></p>
+          <p>Max: <span class="weather-day-temp-max"><%= elem.temp.max %></span></p>
         </li>
       <% }) %>
     </ul>
