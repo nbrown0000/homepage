@@ -50,8 +50,8 @@ body {
 
 .weather-day {
   list-style: none;
-  padding: 10px;
-  /* background-color: skyblue */
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 /* LAYOUT FOR SMARTPHONES */
@@ -78,17 +78,18 @@ body {
   .weather-day {
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
+    padding: 5px 20px;
+    margin: 5px;
   }
   .weather-day:first-child {
     flex: 5 1 auto;
-    /* background-color: springgreen; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
   }
   .weather-day:first-child h1 {
     font-size: 2em;
+    font-weight: lighter;
   }
   .weather-day:first-child p {
     font-size: 1.1em;
@@ -97,12 +98,16 @@ body {
   .weather-day:nth-child(n+2) {
     flex: 1 1 auto;
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
   }
   .weather-day:nth-child(n+2) h1 {
     color: #404040;
     font-size: 1em;
     font-weight: lighter;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 2em;
   }
   .weather-day:nth-child(n+2) > p {
     font-size: 0.6em;
