@@ -5,7 +5,7 @@
     <ul class="news-list">
       <% newsData.articles.map(function(elem) { %>
         <li class="news-article">
-          <a class="news-article-link" href="<%= elem.url %>">
+          <a class="news-article-link" href="<%= elem.url %>" target="_blank">
             <h1><%= elem.title %></h1>
             <% if (elem.urlToImage === null) { %>
               <img class="news-article-default-image" src="<%= defaultArticleImage %>" alt="no image found" />
