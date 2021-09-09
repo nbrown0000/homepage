@@ -12,6 +12,18 @@
       default: return "";
     }
   }
+
+  function getDescriptionImage(description) {
+    const parsedDesc = description.toLowerCase();
+    let image;
+    if (parsedDesc.includes("clear")) { image = "/img/sun.png" }
+    else if (parsedDesc.includes("clouds")) { image = "/img/cloudy.png" }
+    else if (parsedDesc.includes("rain")) { image = "/img/rainy-day.png" }
+    else if (parsedDesc.includes("drizzle")) { image = "/img/rainy-day.png" }
+    else if (parsedDesc.includes("thunderstorm")) { image = "/img/storm.png" }
+    else if (parsedDesc.includes("snow")) { image = "/img/snow.png" }
+    return image;
+  }
   %>
 
   <% if (weatherData) { %>
@@ -21,6 +33,7 @@
         <% const day = dayOfWeek(new Date(elem.dt * 1000).getDay()) %>
         <% const date = new Date(elem.dt * 1000).getDate() %>
         <% const month = new Date(elem.dt * 1000).getMonth() + 1 %>
+        <% const image = getDescriptionImage(elem.weather[0].description) %>
         <li class="weather-day">
 
           <p>
@@ -37,22 +50,25 @@
             <% } %>
           </h1>
 
-          <p>
+          <p class="weather-day-temp-min">
             <!-- Min:  -->
-            <span class="weather-day-temp-min">
+            <span>
               <%= elem.temp.min.toFixed(0) %><% if (index===0) { %>&#8451;<% } %>
             </span>
           </p>
 
-          <p>
+          <p class="weather-day-temp-max">
             <!-- Max:  -->
-            <span class="weather-day-temp-max">
+            <span>
               <%= elem.temp.max.toFixed(0) %><% if (index===0) { %>&#8451;<% } %>
             </span>
           </p>
 
           <p class="weather-day-description">
-            <%= elem.weather[0].description %>
+            <img src="<%= image %>" />
+            <span>
+              <%= elem.weather[0].description %>
+            </span>
           </p>
         </li>
       <% }) %>
