@@ -178,7 +178,7 @@ body {
     width: 3em;
   }
   .news-section {
-
+    padding: 0 10px;
   }
   .news-list {
     flex-direction: row;
@@ -186,7 +186,11 @@ body {
     flex-wrap: wrap;
   }
   .news-article {
+    padding: 10px 0;
     border-bottom: 1px solid #E6E6E6;
+  }
+  .news-article:last-child {
+    border-bottom: none;
   }
   .news-article-link {
     width: 100%;
