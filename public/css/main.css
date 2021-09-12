@@ -54,6 +54,14 @@ body {
   list-style: none;
 }
 
+.news-list {
+  display: flex;
+}
+
+.news-article {
+  list-style: none;
+}
+
 /* LAYOUT FOR SMARTPHONES */
 @media screen and (max-width: 767px) {
   .hidden-mobile {
@@ -394,19 +402,3 @@ body {
 
 .grow { transition: all .2s ease-in-out; }
 .grow:hover { transform: scale(1.1); }
-
-.news-section {
-  margin: 0 10px;
-}
-.news-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.news-article {
-  list-style: none;
-  padding: 10px 0;
-  border-bottom: 1px solid #E6E6E6;
-}
