@@ -172,6 +172,14 @@ body {
   .news-section {
 
   }
+  .news-list {
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .news-article {
+    border-bottom: 1px solid #E6E6E6;
+  }
   .news-article-link {
     width: 100%;
     display: flex;
