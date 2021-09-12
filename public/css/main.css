@@ -213,6 +213,11 @@ body {
   .nav-list img {
     width: 45px;
   }
+  .nav-weather,
+  .nav-news,
+  .nav-todos {
+    display: none;
+  }
   .login, .register {
     width: 400px;
     height: 500px;
