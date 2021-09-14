@@ -346,6 +346,7 @@ body {
   .news-article-link h1 {
     padding-right: 5px;
     font-size: 0.8em;
+    font-weight: lighter;
   }
   .news-article-image {
     min-width: 8em;
