@@ -481,10 +481,6 @@ body {
     display: flex;
     padding: 10px;
   }
-  .news-article-link {
-    border-bottom: 1px solid #E6E6E6;
-    padding: 0 10px 10px 10px;
-  }
   .news-article:nth-child(3n-2) {
     border-right: 1px solid #E6E6E6;
   }
@@ -495,6 +491,8 @@ body {
     display: flex;
     text-decoration: none;
     color: #000;
+    border-bottom: 1px solid #E6E6E6;
+    padding: 0 10px 10px 10px;
   }
   .news-article-link h1 {
     padding-right: 5px;
