@@ -510,8 +510,6 @@ body {
     min-width: 8em;
     object-fit: cover;
     max-height: 5em;
-    padding: 1em;
-    border: 1px solid #E6E6E6;
   }
 
   .todos-section {
