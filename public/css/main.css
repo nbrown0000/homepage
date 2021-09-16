@@ -207,6 +207,7 @@ body {
   }
   .news-article-link img {
     min-width: 8em;
+    max-width: 8em;
     object-fit: cover;
     max-height: 5em;
   }
