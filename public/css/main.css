@@ -341,12 +341,7 @@ body {
     font-size: 0.8em;
     font-weight: lighter;
   }
-  .news-article-image {
-    min-width: 8em;
-    object-fit: cover;
-    max-height: 5em;
-  }
-  .news-article-default-image {
+  .news-article-link img {
     min-width: 8em;
     object-fit: cover;
     max-height: 5em;
