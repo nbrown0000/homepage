@@ -203,17 +203,10 @@ body {
   .news-article-link h1 {
     font-size: 0.8em;
   }
-  .news-article-image {
+  .news-article-link img {
     min-width: 8em;
     object-fit: cover;
     max-height: 5em;
-  }
-  .news-article-default-image {
-    min-width: 8em;
-    object-fit: cover;
-    max-height: 5em;
-    padding: 1em;
-    border: 1px solid #E6E6E6;
   }
   
   .todos-section {
