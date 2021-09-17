@@ -3,13 +3,13 @@
   <%- include('partials/nav.ejs') %>
   <%- include('partials/weather.ejs') %>
   <%- include('partials/news.ejs') %>
-  <%- include('partials/todos.ejs') %>
+  <%- include('partials/tasks.ejs') %>
 
 </main>
 
 <script>
   window.onload = function() {
     document.getElementsByClassName('news-section')[0].classList.add('hidden-mobile');
-    document.getElementsByClassName('todos-section')[0].classList.add('hidden-mobile');
+    document.getElementsByClassName('tasks-section')[0].classList.add('hidden-mobile');
   }
 </script>

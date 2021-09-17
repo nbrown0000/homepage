@@ -219,7 +219,7 @@ body {
     max-height: 5em;
   }
   
-  .todos-section {
+  .tasks-section {
 
   }
 }
@@ -239,7 +239,7 @@ body {
   }
   .nav-weather,
   .nav-news,
-  .nav-todos {
+  .nav-tasks {
     display: none;
   }
   .login, .register {
@@ -357,7 +357,7 @@ body {
     max-height: 5em;
   }
 
-  .todos-section {
+  .tasks-section {
     grid-column: 2 / span 1;
     grid-row: 3 / span 1;
     display: none;
@@ -385,7 +385,7 @@ body {
   }
   .nav-weather,
   .nav-news,
-  .nav-todos {
+  .nav-tasks {
     display: none;
   }
   .weather-section {
@@ -506,7 +506,7 @@ body {
     max-height: 5em;
   }
 
-  .todos-section {
+  .tasks-section {
     display: none;
   }
 }
