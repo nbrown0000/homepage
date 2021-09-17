@@ -1,3 +1,17 @@
 <section class="tasks-section hidden-mobile">
-  Tasks
+  <% if (tasksData) { %>
+
+    <ul class="task-list">
+      <% tasksData.map(function(elem) { %>
+        <li class="task">
+          <%= elem.name %>
+        </li>
+      <% }) %>
+    </ul>
+
+  <% } else { %>
+
+    <p>No task data!!!</p>
+
+  <% } %>
 </section>
