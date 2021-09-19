@@ -17,17 +17,17 @@ const getTasksData = async (req, res, next) => {
       todos: [
         {
           id: 1,
-          text: "eat pizza",
+          text: "bread",
           done: false
         },
         {
           id: 2,
-          text: "buy socks",
+          text: "milk",
           done: true
         },
         {
           id: 3,
-          text: "code stuff!",
+          text: "cheese",
           done: false
         }
       ]

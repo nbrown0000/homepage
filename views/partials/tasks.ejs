@@ -1,13 +1,26 @@
 <section class="tasks-section hidden-mobile">
   <% if (tasksData) { %>
 
-    <ul class="task-list">
+    <ul class="tasks-list">
+      <h1>Tasks</h1>
       <% tasksData.map(function(elem) { %>
-        <li class="task">
+        <li class="task" onclick="setSelected('<%= elem.id %>')">
           <%= elem.name %>
         </li>
       <% }) %>
     </ul>
+
+    <% tasksData.map(function(task) { %>
+      <ul class="todos-list hidden-todos id-<%= task.id %>">
+        <h1><%= task.name %></h1>
+        <% task.todos.map(function(todo) { %>
+        <li>
+          <%= todo.text %>
+        </li>
+        <% }) %>
+      </ul>
+    <% }) %>
+
 
   <% } else { %>
 
@@ -15,3 +28,5 @@
 
   <% } %>
 </section>
+
+<script type="text/javascript" src="js/tasks.js"></script>
