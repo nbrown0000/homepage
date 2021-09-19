@@ -220,7 +220,24 @@ body {
   }
   
   .tasks-section {
-
+    padding: 10px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+  }
+  .tasks-list {
+    width: 40%;
+    height: 100%;
+    list-style: none;
+    border-right: 1px solid #E6E6E6;
+  }
+  .tasks-list h1 {
+    margin-bottom: 20px;
+  }
+  .todos-list {
+    width: 60%;
+    height: 100%;
+    padding-left: 10px;
   }
 }
 
@@ -570,3 +587,7 @@ body {
 
 .grow { transition: all .2s ease-in-out; }
 .grow:hover { transform: scale(1.1); }
+
+.hidden-todos {
+  display: none;
+}
