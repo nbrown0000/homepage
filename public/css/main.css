@@ -65,10 +65,6 @@ body {
 
 /* LAYOUT FOR SMARTPHONES */
 @media screen and (max-width: 767px) {
-  .hidden-mobile {
-    display: none;
-  }
-
   .main-dashboard {
     display: flex;
     flex-direction: column;
@@ -238,6 +234,10 @@ body {
     width: 60%;
     height: 100%;
     padding-left: 10px;
+  }
+
+  .hidden-mobile {
+    display: none;
   }
 }
 
