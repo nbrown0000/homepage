@@ -359,6 +359,7 @@ body {
     margin-right: 10px;
   }
   .news-article-link {
+    width: 100%;
     display: flex;
     text-decoration: none;
     color: #000;
@@ -370,8 +371,10 @@ body {
   }
   .news-article-link img {
     min-width: 8em;
+    max-width: 8em;
     object-fit: cover;
     max-height: 5em;
+    margin-left: auto;
   }
 
   .tasks-section {
