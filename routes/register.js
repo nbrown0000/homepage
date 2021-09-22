@@ -63,21 +63,46 @@ router.post('/', registerValidate, (req, res) => {
     const latlonResponse = await getLatLon(city, country)
     const { lat, lon } = latlonResponse.data.coord
     
-    bcrypt.hash(password, saltRounds, function(err, hash) {
+    bcrypt.hash(password, saltRounds, async function(err, hash) {
       if (err) { console.error(err) }
       
       db = client.db(DB_NAME)
-      db.collection('users').insertOne({
-        name,
-        geoData: { lat, lon },
-        email,
-        password: hash
-      })
-        .then(success => {
-          req.session.error = ''
-          res.redirect('/login')
+      // db.collection('users').insertOne({
+      //   name,
+      //   geoData: { lat, lon },
+      //   email,
+      //   password: hash
+      // })
+      //   .then(success => {
+      //     console.log(success)
+      //     req.session.error = ''
+      //     res.redirect('/login')
+      //   })
+      //   .catch(err => console.error(err))
+      try {
+        const insertUserResult = await db.collection('users').insertOne({
+          name,
+          city,
+          country,
+          email,
+          password: hash
         })
-        .catch(err => console.error(err))
+
+        if (insertUserResult.insertedId) {
+          const insertGeoDataResult = await db.collection('geolocation').insertOne({
+            lat,
+            lon,
+            user_id: insertUserResult.insertedId
+          })
+        }
+
+        req.session.error = ''
+        res.redirect('/login')
+
+      } catch (err) {
+        console.error(err)
+      }
+      
     })
 
     

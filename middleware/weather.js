@@ -19,11 +19,11 @@ const getWeatherData = async (req, res, next) => {
   // check if weather up to date
   try {
     const db = client.db(DB_NAME)
-    let collection = db.collection('users')
-    let query = { _id: ObjectId(req.session.userId) }
+    let collection = db.collection('weather')
+    let query = { user_id: ObjectId(req.session.userId) }
     const response = await collection.findOne(query)
     
-    if(response.weatherData) {
+    if(response) {
       const dateLastFetched = new Date(response.weatherData.dateFetched)
       const dateLastFetched_date = dateLastFetched.getDate()
       const dateLastFetched_month = dateLastFetched.getMonth() + 1
@@ -46,11 +46,22 @@ const getWeatherData = async (req, res, next) => {
   // get user geoData
   try {
     const db = client.db(DB_NAME)
-    let collection = db.collection('users')
-    let query = { "_id": ObjectId(req.session.userId) } 
+    let collection = db.collection('geolocation')
+    let query = { "user_id": ObjectId(req.session.userId) } 
     const response = await collection.findOne(query)
-    res.locals.dateWeatherFetched = response.dateWeatherFetched
-    res.locals.geoData = response.geoData
+    const { lat, lon } = response
+    res.locals.geoData = { lat, lon }
+  } catch (err) { console.log(err) }
+
+  // get date of last weather fetch
+  try {
+    const db = client.db(DB_NAME)
+    let collection = db.collection('weather')
+    let query = { "user_id": ObjectId(req.session.userId) } 
+    const response = await collection.findOne(query)
+    if(response) {
+      res.locals.dateWeatherFetched = response.weatherData.dateWeatherFetched
+    }
   } catch (err) { console.log(err) }
 
   // fetch new weather report
@@ -65,10 +76,10 @@ const getWeatherData = async (req, res, next) => {
   // store weather in DB
   try {
     const db = client.db(DB_NAME)
-    let collection = db.collection('users')
-    let query = { _id: ObjectId(req.session.userId) }
+    let collection = db.collection('weather')
+    let query = { user_id: ObjectId(req.session.userId) }
     let update = { $set: { weatherData: res.locals.weatherData } }
-    const response = collection.updateOne(query, update)
+    const response = collection.updateOne(query, update, {upsert:true})
 
   } catch (err) { console.log(err) }
   
