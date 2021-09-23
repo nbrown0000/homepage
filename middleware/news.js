@@ -19,6 +19,32 @@ const getNewsData = async (req, res, next) => {
     return
   }
 
+  // check if news up to date
+  try {
+    const db = client.db(DB_NAME)
+    let collection = db.collection('news')
+    let query = { user_id: ObjectId(req.session.userId) }
+    const response = await collection.findOne(query)
+    
+    if(response) {
+      const dateLastFetched = new Date(response.newsData.dateFetched)
+      const dateLastFetched_minute = dateLastFetched.getMinutes()
+      const today = new Date()
+      const today_minute = today.getMinutes()
+      
+      // Check DB for last datetime accessed
+      // If within the last 2 hour pass stored news data to app.locals
+      if (today_minute - dateLastFetched_minute < 120) {
+        console.log('Fetching news from DB')
+        res.locals.newsData = response.newsData
+        return next()
+      }
+    }
+
+  } catch (err) {
+    console.log(err)
+  }
+
   // get country data from user account
   let userCountry
   try {
@@ -36,11 +62,24 @@ const getNewsData = async (req, res, next) => {
   const data = await countryData.find(c => c.Name.toLowerCase() === userCountry.toLowerCase())
   const countryCode = data.Code
 
-  // Get weather data
-  const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${NEWS_API_KEY}`)
+  // Get news data
+  try {
+    const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${NEWS_API_KEY}`)
+    // Store news in res.locals so '/' route can read and pass it to views
+    console.log('Fetching for updated news')
+    res.locals.newsData = response.data
+    res.locals.newsData.dateFetched = new Date().toUTCString()
+  } catch (err) { console.log(err) }
 
-  // Store weather in res.locals so '/' route can read and pass it to views
-  res.locals.newsData = response.data
+  // store news in DB
+  try {
+    const db = client.db(DB_NAME)
+    let collection = db.collection('news')
+    let query = { user_id: ObjectId(req.session.userId) }
+    let update = { $set: { newsData: res.locals.newsData } }
+    const response = await collection.updateOne(query, update, {upsert:true})
+
+  } catch (err) { console.log(err) }
 
   next()
 }
