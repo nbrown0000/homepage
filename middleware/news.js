@@ -35,7 +35,6 @@ const getNewsData = async (req, res, next) => {
       // Check DB for last datetime accessed
       // If within the last 2 hour pass stored news data to app.locals
       if (today_minute - dateLastFetched_minute < 120) {
-        console.log('Fetching news from DB')
         res.locals.newsData = response.newsData
         return next()
       }
@@ -66,7 +65,6 @@ const getNewsData = async (req, res, next) => {
   try {
     const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${NEWS_API_KEY}`)
     // Store news in res.locals so '/' route can read and pass it to views
-    console.log('Fetching for updated news')
     res.locals.newsData = response.data
     res.locals.newsData.dateFetched = new Date().toUTCString()
   } catch (err) { console.log(err) }
