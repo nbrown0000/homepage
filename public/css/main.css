@@ -183,6 +183,13 @@ body {
   }
   .news-section {
     padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .news-title {
+    width: 100%;
+    text-align: center;
+    padding: 20px 10px 10px 10px;
   }
   .news-list {
     flex-direction: row;
@@ -343,6 +350,12 @@ body {
     grid-row: 3 / span 1;
     padding: 0 10px;
     display: flex;
+    flex-direction: column;
+  }
+  .news-title {
+    width: 100%;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
   }
   .news-list {
     flex-direction: row;
@@ -488,6 +501,11 @@ body {
     grid-row: 3 / span 1;
     padding: 0 10px;
     width: 100%;
+  }
+  .news-title {
+    width: 100%;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
   }
   .news-list {
     display: grid;
