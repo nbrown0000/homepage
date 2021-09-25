@@ -241,6 +241,7 @@ body {
     width: 60%;
     height: 100%;
     padding-left: 10px;
+    list-style: none;
   }
 
   .hidden-mobile {
