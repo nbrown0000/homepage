@@ -3,15 +3,15 @@
 
     <ul class="tasks-list">
       <h1>Tasks</h1>
-      <% tasksData.map(function(elem) { %>
-        <li class="task" onclick="setSelected('<%= elem.id %>')">
+      <% tasksData.map(function(elem, index) { %>
+        <li class="task" onclick="setSelected('<%= index+1 %>')">
           <%= elem.name %>
         </li>
       <% }) %>
     </ul>
 
-    <% tasksData.map(function(task) { %>
-      <ul class="todos-list hidden-todos id-<%= task.id %>">
+    <% tasksData.map(function(task, index) { %>
+      <ul class="todos-list hidden-todos id-<%= index+1 %>">
         <h1><%= task.name %></h1>
         <% task.todos.map(function(todo) { %>
         <li>
