@@ -67,18 +67,7 @@ router.post('/', registerValidate, (req, res) => {
       if (err) { console.error(err) }
       
       db = client.db(DB_NAME)
-      // db.collection('users').insertOne({
-      //   name,
-      //   geoData: { lat, lon },
-      //   email,
-      //   password: hash
-      // })
-      //   .then(success => {
-      //     console.log(success)
-      //     req.session.error = ''
-      //     res.redirect('/login')
-      //   })
-      //   .catch(err => console.error(err))
+
       try {
         const insertUserResult = await db.collection('users').insertOne({
           name,
