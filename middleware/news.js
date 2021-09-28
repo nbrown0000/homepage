@@ -41,7 +41,7 @@ const getNewsData = async (req, res, next) => {
     }
 
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 
   // get country data from user account
@@ -67,7 +67,7 @@ const getNewsData = async (req, res, next) => {
     // Store news in res.locals so '/' route can read and pass it to views
     res.locals.newsData = response.data
     res.locals.newsData.dateFetched = new Date().toUTCString()
-  } catch (err) { console.log(err) }
+  } catch (err) { console.error(err) }
 
   // store news in DB
   try {
@@ -77,7 +77,7 @@ const getNewsData = async (req, res, next) => {
     let update = { $set: { newsData: res.locals.newsData } }
     const response = await collection.updateOne(query, update, {upsert:true})
 
-  } catch (err) { console.log(err) }
+  } catch (err) { console.error(err) }
 
   next()
 }

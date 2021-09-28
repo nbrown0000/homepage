@@ -36,7 +36,7 @@ router.post('/', loginValidate, (req, res) => {
   const { email, password } = req.body
 
   MongoClient.connect(DB_URL, (err, client) => {
-    if (err) return console.log(err)
+    if (err) return console.error(err)
     db = client.db(DB_NAME)
     db.collection('users')
       .findOne({ "email": email })

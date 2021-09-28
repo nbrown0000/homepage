@@ -58,7 +58,7 @@ router.post('/', registerValidate, (req, res) => {
   const { name, city, country, email, password } = req.body
 
   MongoClient.connect(DB_URL, async (err, client) => {
-    if (err) return console.log(err)
+    if (err) return console.error(err)
 
     const latlonResponse = await getLatLon(city, country)
     const { lat, lon } = latlonResponse.data.coord

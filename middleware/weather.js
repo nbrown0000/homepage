@@ -12,7 +12,7 @@ const {
 const getWeatherData = async (req, res, next) => {
   
   const client = await MongoClient.connect(DB_URL)
-    .catch(err => console.log(err))
+    .catch(err => console.error(err))
 
   if(!client) { return }
 
@@ -40,7 +40,7 @@ const getWeatherData = async (req, res, next) => {
     }
 
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 
   // get user geoData
@@ -51,7 +51,7 @@ const getWeatherData = async (req, res, next) => {
     const response = await collection.findOne(query)
     const { lat, lon } = response
     res.locals.geoData = { lat, lon }
-  } catch (err) { console.log(err) }
+  } catch (err) { console.error(err) }
 
   // get date of last weather fetch
   try {
@@ -62,7 +62,7 @@ const getWeatherData = async (req, res, next) => {
     if(response) {
       res.locals.dateWeatherFetched = response.weatherData.dateWeatherFetched
     }
-  } catch (err) { console.log(err) }
+  } catch (err) { console.error(err) }
 
   // fetch new weather report
   // and store in app.locals with dateFetched timestamp
@@ -71,7 +71,7 @@ const getWeatherData = async (req, res, next) => {
     const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,current,alerts&units=metric&appid=${WEATHER_API_KEY}`)
     res.locals.weatherData = response.data
     res.locals.weatherData.dateFetched = new Date().toUTCString()
-  } catch (err) { console.log(err) }
+  } catch (err) { console.error(err) }
 
   // store weather in DB
   try {
@@ -81,7 +81,7 @@ const getWeatherData = async (req, res, next) => {
     let update = { $set: { weatherData: res.locals.weatherData } }
     const response = collection.updateOne(query, update, {upsert:true})
 
-  } catch (err) { console.log(err) }
+  } catch (err) { console.error(err) }
   
   next()
 }

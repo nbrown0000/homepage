@@ -10,7 +10,7 @@ const getTasksData = async (req, res, next) => {
 
   // Connect to Mongo DB Client
   const client = await MongoClient.connect(DB_URL)
-    .catch(err => console.log(err))
+    .catch(err => console.error(err))
 
   if(!client) {
     console.error('Error connecting to DB')
@@ -30,7 +30,7 @@ const getTasksData = async (req, res, next) => {
     }
 
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 
   next()
