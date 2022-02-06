@@ -1,7 +1,6 @@
 const DAY = 1000 * 60 * 60 * 24;
 
 const {
-  PORT = 3000,
   NODE_ENV = "development",
   SESS_NAME = "sid",
   SESS_SECRET = "something!that$is%secret&",
@@ -14,7 +13,6 @@ const {
 } = process.env;
 
 module.exports = {
-  PORT,
   NODE_ENV,
   SESS_NAME,
   SESS_SECRET,
