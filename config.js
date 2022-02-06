@@ -6,7 +6,7 @@ const {
   SESS_NAME = "sid",
   SESS_SECRET = "something!that$is%secret&",
   SESS_LIFETIME = DAY,
-  DB_URL = "mongodb://localhost/",
+  DB_URL = process.env.MONGODB_URI,
   DB_PORT = "27017",
   DB_NAME = "homepage",
   WEATHER_API_KEY,
