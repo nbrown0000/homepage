@@ -1,26 +1,36 @@
 {
   "name": "homepage",
   "version": "1.0.0",
+  "engines": "16.10.0",
   "description": "A landing page for your browser with weather, news and todo list",
   "main": "app.js",
   "dependencies": {
+    "@types/jest": "^27.0.2",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
+    "config": "^3.3.7",
     "connect-mongo": "^4.4.1",
+    "connect-pg-simple": "^7.0.0",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.2",
     "express-validator": "^6.12.1",
-    "mongodb": "^4.1.0"
+    "mongodb": "^4.1.0",
+    "mongoose": "^6.2.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "@jest-mock/express": "^1.4.5",
+    "@shelf/jest-mongodb": "^2.1.0",
+    "jest": "^27.2.4",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.6"
   },
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "test": "jest --forceExit --detectOpenHandles",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

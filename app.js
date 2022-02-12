@@ -51,7 +51,6 @@ const { getTasksData } = require('./middleware/tasks')
 
 const loginRoute = require('./routes/login')
 const registerRoute = require('./routes/register')
-// const { redirectHome, redirectLogin } = require('./middleware/redirects')
 
 app.get('/', redirectLogin, getWeatherData, getNewsData, getTasksData, (req, res) => {
   const { weatherData, newsData, tasksData }  = res.locals
@@ -72,6 +71,4 @@ app.post('/logout', (req, res) => {
 
 })
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`)
-})
+module.exports = app
