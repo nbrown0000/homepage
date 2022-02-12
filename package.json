@@ -1,7 +1,9 @@
 {
   "name": "homepage",
   "version": "1.0.0",
-  "engines": "16.10.0",
+  "engines": {
+    "node": "16.10.0"
+  },
   "description": "A landing page for your browser with weather, news and todo list",
   "main": "app.js",
   "dependencies": {
