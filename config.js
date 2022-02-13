@@ -1,10 +1,8 @@
-const DAY = 1000 * 60 * 60 * 24;
-
 const {
-  NODE_ENV = process.env.NODE_ENV || "development",
+  NODE_ENV,
   SESS_NAME,
   SESS_SECRET,
-  SESS_LIFETIME = process.env.SESS_LIFETIME || DAY,
+  SESS_LIFETIME,
   DB_URL = process.env.MONGODB_URI,
   DB_PORT,
   DB_NAME,
