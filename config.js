@@ -1,13 +1,13 @@
 const DAY = 1000 * 60 * 60 * 24;
 
 const {
-  NODE_ENV = "development",
-  SESS_NAME = "sid",
-  SESS_SECRET = "something!that$is%secret&",
+  NODE_ENV = process.env.NODE_ENV || "development",
+  SESS_NAME,
+  SESS_SECRET,
   SESS_LIFETIME = DAY,
   DB_URL = process.env.MONGODB_URI,
-  DB_PORT = "27017",
-  DB_NAME = process.env.DB_NAME,
+  DB_PORT,
+  DB_NAME,
   WEATHER_API_KEY,
   NEWS_API_KEY,
 } = process.env;
