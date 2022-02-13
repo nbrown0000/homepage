@@ -38,7 +38,7 @@ app.use(session({
   secret: SESS_SECRET,
   store: MongoStore.create({ mongoUrl: DB_URL }),
   cookie: {
-    maxAge: SESS_LIFETIME,
+    maxAge: Number(SESS_LIFETIME),
     sameSite: true, // TODO: CSRF
     secure: IN_PROD
   }
