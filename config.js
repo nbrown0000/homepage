@@ -4,7 +4,7 @@ const {
   NODE_ENV = process.env.NODE_ENV || "development",
   SESS_NAME,
   SESS_SECRET,
-  SESS_LIFETIME = DAY,
+  SESS_LIFETIME = process.env.SESS_LIFETIME || DAY,
   DB_URL = process.env.MONGODB_URI,
   DB_PORT,
   DB_NAME,
