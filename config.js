@@ -7,7 +7,7 @@ const {
   SESS_LIFETIME = DAY,
   DB_URL = process.env.MONGODB_URI,
   DB_PORT = "27017",
-  DB_NAME = "homepage",
+  DB_NAME = process.env.DB_NAME,
   WEATHER_API_KEY,
   NEWS_API_KEY,
 } = process.env;
