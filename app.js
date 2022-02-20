@@ -6,7 +6,6 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const {
-  PORT,
   NODE_ENV,
   SESS_NAME,
   SESS_SECRET,
