@@ -31,10 +31,13 @@ const getNewsData = async (req, res, next) => {
       const dateLastFetched_minute = dateLastFetched.getMinutes()
       const today = new Date()
       const today_minute = today.getMinutes()
+
+      const daysPassed = today.getDate() -  dateLastFetched.getDate()
+      const minutesPassed = today_minute - dateLastFetched_minute
       
       // Check DB for last datetime accessed
       // If within the last 2 hour pass stored news data to app.locals
-      if (today_minute - dateLastFetched_minute < 120) {
+      if (daysPassed < 1 && minutesPassed < 120) {
         res.locals.newsData = response.newsData
         return next()
       }
